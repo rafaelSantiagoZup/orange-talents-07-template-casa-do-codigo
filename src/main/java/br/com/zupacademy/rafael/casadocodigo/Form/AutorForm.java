@@ -1,5 +1,6 @@
 package br.com.zupacademy.rafael.casadocodigo.Form;
 
+import br.com.zupacademy.rafael.casadocodigo.configuration.utils.EmailDuplicado;
 import br.com.zupacademy.rafael.casadocodigo.models.Autor;
 import org.hibernate.validator.constraints.Length;
 
@@ -15,6 +16,7 @@ public class AutorForm {
     @NotNull
     @NotEmpty
     @Email
+    @EmailDuplicado
     private String email;
     @NotEmpty
     @NotNull
