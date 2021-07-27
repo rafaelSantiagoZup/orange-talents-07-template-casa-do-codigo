@@ -3,24 +3,41 @@ package br.com.zupacademy.rafael.casadocodigo.Form;
 import br.com.zupacademy.rafael.casadocodigo.models.Autor;
 import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+
 public class AutorForm {
-    @NotNull
     @NotEmpty
+    @NotNull
     private String nome;
     @NotNull
+    @NotEmpty
     @Email
     private String email;
-    @NotNull @NotEmpty
+    @NotEmpty
+    @NotNull
     @Length(max = 400)
     private String descricao;
 
+    public AutorForm() {
+    }
+
     public Autor converteAutorFormParaAutor(){
+
         return new Autor(this.nome,this.email,this.descricao);
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
 }

@@ -1,22 +1,28 @@
 package br.com.zupacademy.rafael.casadocodigo.models;
 
 
+import org.springframework.context.annotation.Primary;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
-import org.hibernate.validator.constraints.Length;
-
 @Entity
 public class Autor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotNull(message = "O campo nome é obrigatório!")
+    @NotEmpty
+    @Column(nullable = false)
     private String nome;
+    @NotNull(message = "O campo email é obrigatório!")
+    @Email
+    @Column(unique = true, nullable = false)
     private String email;
-    @Column(length = 400)
+    @Column(length = 400,nullable = false)
     private String descricao;
     private LocalDateTime dataDeCriacao = LocalDateTime.now();
 
@@ -45,7 +51,7 @@ public class Autor {
         return descricao;
     }
 
-    public LocalDateTime getTimestamp() {
+    public LocalDateTime getDataDeCriacao() {
         return dataDeCriacao;
     }
 }
