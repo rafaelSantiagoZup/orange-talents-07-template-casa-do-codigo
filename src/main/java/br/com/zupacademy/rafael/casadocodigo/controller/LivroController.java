@@ -1,17 +1,17 @@
 package br.com.zupacademy.rafael.casadocodigo.controller;
 
+import br.com.zupacademy.rafael.casadocodigo.DTO.LivrosDTO;
 import br.com.zupacademy.rafael.casadocodigo.Form.LivroForm;
 import br.com.zupacademy.rafael.casadocodigo.models.Livro;
 import br.com.zupacademy.rafael.casadocodigo.repository.AutorRepository;
 import br.com.zupacademy.rafael.casadocodigo.repository.CategoriaRepository;
 import br.com.zupacademy.rafael.casadocodigo.repository.LivroRepository;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/livro")
@@ -32,5 +32,14 @@ public class LivroController {
         Livro livro = livroForm.toModel(categoriaRepository,autorRepository);
         livroRepository.save(livro);
         return ResponseEntity.ok().build();
+    }
+    @GetMapping("/listar")
+    public List<LivrosDTO> listarLivros(){
+        List<LivrosDTO> retorno = new ArrayList<LivrosDTO>();
+        List<Livro> livrosSalvos = livroRepository.findAll();
+        livrosSalvos.forEach(livro->{
+            retorno.add(new LivrosDTO(livro));
+        });
+        return retorno;
     }
 }
