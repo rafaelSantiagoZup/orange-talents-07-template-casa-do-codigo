@@ -15,7 +15,7 @@ import javax.validation.Valid;
 @RequestMapping("/api/autor")
 public class AutorController {
 
-    private AutorRepository autorRepository;
+    private final AutorRepository autorRepository;
 
     public AutorController(AutorRepository autorRepository) {
         this.autorRepository = autorRepository;

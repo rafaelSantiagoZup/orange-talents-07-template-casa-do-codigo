@@ -1,6 +1,6 @@
 package br.com.zupacademy.rafael.casadocodigo.Form;
 
-import br.com.zupacademy.rafael.casadocodigo.configuration.utils.EmailDuplicado;
+import br.com.zupacademy.rafael.casadocodigo.configuration.utils.validators.Annotations.EmailDuplicado;
 import br.com.zupacademy.rafael.casadocodigo.models.Autor;
 import org.hibernate.validator.constraints.Length;
 

@@ -1,6 +1,6 @@
 package br.com.zupacademy.rafael.casadocodigo.configuration.utils.validators;
 
-import br.com.zupacademy.rafael.casadocodigo.configuration.utils.EmailDuplicado;
+import br.com.zupacademy.rafael.casadocodigo.configuration.utils.validators.Annotations.EmailDuplicado;
 import br.com.zupacademy.rafael.casadocodigo.repository.AutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
