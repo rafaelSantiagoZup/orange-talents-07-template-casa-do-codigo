@@ -1,5 +1,6 @@
 package br.com.zupacademy.rafael.casadocodigo.controller;
 
+import br.com.zupacademy.rafael.casadocodigo.DTO.LivroDetalhesDTO;
 import br.com.zupacademy.rafael.casadocodigo.DTO.LivrosDTO;
 import br.com.zupacademy.rafael.casadocodigo.Form.LivroForm;
 import br.com.zupacademy.rafael.casadocodigo.models.Livro;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/livro")
@@ -28,10 +30,11 @@ public class LivroController {
     }
 
     @PostMapping
-    public ResponseEntity<Livro> criaLivro(@RequestBody @Valid LivroForm livroForm){
+    public ResponseEntity<LivrosDTO> criaLivro(@RequestBody @Valid LivroForm livroForm){
         Livro livro = livroForm.toModel(categoriaRepository,autorRepository);
         livroRepository.save(livro);
-        return ResponseEntity.ok().build();
+        LivrosDTO livroDTO = new LivrosDTO(livro);
+        return ResponseEntity.ok(livroDTO);
     }
     @GetMapping("/listar")
     public List<LivrosDTO> listarLivros(){
@@ -41,5 +44,13 @@ public class LivroController {
             retorno.add(new LivrosDTO(livro));
         });
         return retorno;
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<LivroDetalhesDTO> detalhesLivro(@PathVariable Long id){
+        Optional<Livro> livro = livroRepository.findById(id);
+        if(livro.isPresent()){
+            return ResponseEntity.ok(new LivroDetalhesDTO(livro.get()));
+        }
+        return ResponseEntity.notFound().build();
     }
 }

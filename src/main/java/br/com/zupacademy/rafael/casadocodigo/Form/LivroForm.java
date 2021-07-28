@@ -27,6 +27,9 @@ public class LivroForm {
     @NotNull @Min(100)
     private Integer paginas;
     @NotNull @NotEmpty
+    @ValorUnico(message = "O ISBN deve ser único",
+            classeDoDominio = Livro.class,
+            nomeDoCampo = "ISBN")
     private String isbn;
     @MustBeFuture
     private String dataLancamento;
